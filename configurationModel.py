@@ -37,6 +37,8 @@ def buildConfigModelNetwork(degreeSequence):
     print("Clustering coefficient: " + nx.average_clustering(G).__str__())
     nx.draw(G, with_labels=True)
     pylab.show()
+    
+    return G
         
         
 
@@ -44,8 +46,6 @@ N = 100
 degreesUniform = [0] * N
 degreesNormal = [0] * N
 degreesPower = [0] * N
-
-G = nx.barabasi_albert_graph
 
 mu, sigma = 3, 1
 alpha = 1.5
