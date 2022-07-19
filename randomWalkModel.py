@@ -12,7 +12,7 @@ import scipy.stats as stats
 
 def buildRandomWalkModel(N, m, p):
     # Create a clique of m nodes
-    G = nx.complete_graph(m)
+    G = nx.complete_graph(int(math.sqrt(m)))
     for i in range(G.number_of_nodes(), N):
         firstAttach = np.random.choice(G.nodes)
         neighIter = nx.neighbors(G, firstAttach)
@@ -46,23 +46,23 @@ def buildRandomWalkModel(N, m, p):
                 if(len(otherNodes) > 0) :
                     G.add_edge(i, np.random.choice(list(otherNodes)))
         
-    print("Degree assortativity of RW model: " + nx.degree_assortativity_coefficient(G).__str__())
-    print("Clustering coefficient of RW model: " + nx.average_clustering(G).__str__())
+    print("Degree assortativity of RW model:", nx.degree_assortativity_coefficient(G))
+    print("Clustering coefficient of RW model:", nx.average_clustering(G))
     nx.draw(G, with_labels=True)
     pylab.show()
     
     return G
     
-N = 100
-m = 20
+N = 50
+m = 8
 # Probability of triadic closure
 p = 0
 
 buildRandomWalkModel(N, m, p)
 
 G = nx.barabasi_albert_graph(N,m)
-print("Degree assortativity of BA graph: " + nx.degree_assortativity_coefficient(G).__str__())
-print("Clustering coefficient of BA graph: " + nx.average_clustering(G).__str__())
+print("Degree assortativity of BA graph:", nx.degree_assortativity_coefficient(G))
+print("Clustering coefficient of BA graph:", nx.average_clustering(G))
 nx.draw(G, with_labels=True)
 pylab.show()
     

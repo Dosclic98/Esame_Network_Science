@@ -33,8 +33,8 @@ def buildConfigModelNetwork(degreeSequence):
     G = nx.Graph(MG)
     # Remove self loops
     G.remove_edges_from(nx.selfloop_edges(G))
-    print("Degree assortativity: " + nx.degree_assortativity_coefficient(G).__str__())
-    print("Clustering coefficient: " + nx.average_clustering(G).__str__())
+    print("Degree assortativity:", nx.degree_assortativity_coefficient(G))
+    print("Clustering coefficient:", nx.average_clustering(G))
     nx.draw(G, with_labels=True)
     pylab.show()
     
@@ -42,23 +42,25 @@ def buildConfigModelNetwork(degreeSequence):
         
         
 
-N = 100
+N = 1000
 degreesUniform = [0] * N
 degreesNormal = [0] * N
 degreesPower = [0] * N
 
 mu, sigma = 3, 1
 alpha = 1.5
+a, b = 3, 7
+
 degreesNormal = np.round(np.random.normal(mu, sigma, N)).astype(int)
 while sum(degreesNormal) % 2 != 0 and sum(degreesNormal)/2 > len(degreesNormal):
     degreesNormal = np.round(np.random.normal(mu, sigma, N)).astype(int)
     
-degreesUniform = np.round(np.random.uniform(3,7, size=N)).astype(int)    
+degreesUniform = np.round(np.random.uniform(a,b, size=N)).astype(int)    
 while sum(degreesUniform) % 2 != 0 and sum(degreesUniform)/2 > len(degreesUniform):
-    degreesUniform = np.round(np.random.uniform(3,7, size=N)).astype(int)    
+    degreesUniform = np.round(np.random.uniform(a,b, size=N)).astype(int)    
 
 
-degreesPower = nx.random_powerlaw_tree_sequence(N, tries=5000)
+degreesPower = nx.random_powerlaw_tree_sequence(N, tries=50000)
 
 buildConfigModelNetwork(degreeSequence=degreesNormal)
 buildConfigModelNetwork(degreeSequence=degreesUniform)

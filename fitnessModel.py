@@ -27,16 +27,16 @@ def buildFitnessModel(N, m, dist):
         for j in newNeighbors:
             G.add_edge(i, j)
 
-    print("Degree assortativity: " + nx.degree_assortativity_coefficient(G).__str__())
-    print("Clustering coefficient: " + nx.average_clustering(G).__str__())
+    print("Degree assortativity:", nx.degree_assortativity_coefficient(G))
+    print("Clustering coefficient:", nx.average_clustering(G))
     nx.draw(G, with_labels=True)
     pylab.show()
     
     return G
 
 
-N = 100
-m = 20
+N = 50
+m = 8
 degreesUniform = [0] * N
 degreesNormal = [0] * N
 degreesPower = [0] * N
