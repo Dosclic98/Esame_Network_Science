@@ -37,6 +37,7 @@ def buildFitnessModel(N, m, dist):
 
 N = 50
 m = 8
+a, b = 3, 7
 degreesUniform = [0] * N
 degreesNormal = [0] * N
 degreesPower = [0] * N
@@ -44,8 +45,8 @@ degreesPower = [0] * N
 mu, sigma = 3, 1
 alpha = 1.5
 
-distNormal = np.random.normal(mu, sigma, N)
-distUniform = np.random.uniform(3,7, size=N)
+distNormal = np.round(np.random.normal(mu, sigma, N)).astype(int)
+distUniform = np.round(np.random.uniform(a,b, size=N)).astype(int) 
 distPower = nx.random_powerlaw_tree_sequence(N, tries=5000)
 
 buildFitnessModel(N, m, distNormal)
